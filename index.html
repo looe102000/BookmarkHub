@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連結管理器</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>書籤中心</h1>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜尋連結...">
+            </div>
+            <div class="view-toggle">
+                <button id="gridView" class="view-btn active" title="網格檢視">
+                    <span class="material-icons">grid_view</span>
+                </button>
+                <button id="listView" class="view-btn" title="清單檢視">
+                    <span class="material-icons">view_list</span>
+                </button>
+                <button id="tagsToggleBtn" class="view-btn active" title="顯示/隱藏書籤標籤">
+                    <span class="material-icons">label</span>
+                </button>
+                <button id="tagListToggleBtn" class="view-btn active" title="顯示/隱藏標籤列表">
+                    <span class="material-icons">list</span>
+                </button>
+            </div>
+        </header>
+        <main>
+            <div id="linksList" class="links-grid"></div>
+        </main>
+    </div>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

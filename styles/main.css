@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "微軟正黑體", sans-serif;
+    line-height: 1.6;
+    background: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.search-box {
+    margin: 1rem 0;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.link-card {
+    background: white;
+    padding: 15px 15px 15px 45px; /* 左側增加間距給編號 */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.link-card:hover {
+    transform: translateY(-2px);
+}
+
+.link-number {
+    position: absolute;
+    top: 50%;  /* 垂直置中 */
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #666;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.link-card h3 {
+    margin: 0;
+    padding-right: 10px;
+}
+
+.link-card a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* 連結標題樣式 */
+.link-card h3 a {
+    color: #2c3e50;          /* 深灰藍色的文字顏色 */
+    text-decoration: none;    /* 移除底線 */
+    transition: color 0.2s;   /* 顏色變化時的動畫效果 */
+}
+
+.link-card h3 a:hover {
+    color: #3498db;          /* 懸停時變為亮藍色 */
+}
+
+.tags {
+    display: none;
+    margin-top: 8px;
+}
+
+.tags.show {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    background: #e9ecef;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.tag {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+.tag:hover {
+    background-color: #dee2e6;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.view-btn {
+    padding: 8px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.view-btn.active {
+    background: #007bff;
+    color: white;
+}
+
+/* 清單檢視樣式 */
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 0 16px;
+    transition: all 0.3s;
+}
+
+.tags-list.hide {
+    display: none;
+}
+
+.tag-filter {
+    padding: 4px 12px;
+    border-radius: 16px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tag-filter:hover {
+    background-color: #e0e0e0;
+}
+
+.tag-filter.active {
+    background-color: #4a90e2;
+    color: white;
+}

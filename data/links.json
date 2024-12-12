@@ -1,0 +1,124 @@
+{
+  "links": [
+    {
+      "id": 1,
+      "name": "Google",
+      "url": "https://www.google.com",
+      "tags": ["搜尋引擎", "工具"]
+    },
+    {
+      "id": 2, 
+      "name": "GitHub",
+      "url": "https://github.com",
+      "tags": ["程式開發", "版本控制"]
+    },
+    {
+      "id": 3,
+      "name": "MDN Web Docs",
+      "url": "https://developer.mozilla.org",
+      "tags": ["程式文件", "教學", "Web開發"]
+    },
+    {
+      "id": 4,
+      "name": "Stack Overflow",
+      "url": "https://stackoverflow.com",
+      "tags": ["程式社群", "問答平台"]
+    },
+    {
+      "id": 5,
+      "name": "YouTube",
+      "url": "https://www.youtube.com",
+      "tags": ["影片", "教學", "娛樂"]
+    },
+    {
+      "id": 6,
+      "name": "ChatGPT",
+      "url": "https://chat.openai.com",
+      "tags": ["AI", "工具", "學習"]
+    },
+    {
+      "id": 7,
+      "name": "VS Code",
+      "url": "https://code.visualstudio.com",
+      "tags": ["編輯器", "開發工具"]
+    },
+    {
+      "id": 8,
+      "name": "NPM",
+      "url": "https://www.npmjs.com",
+      "tags": ["套件管理", "JavaScript"]
+    },
+    {
+      "id": 9,
+      "name": "Docker Hub",
+      "url": "https://hub.docker.com",
+      "tags": ["容器", "部署"]
+    },
+    {
+      "id": 10,
+      "name": "React",
+      "url": "https://reactjs.org",
+      "tags": ["前端框架", "JavaScript"]
+    },
+    {
+      "id": 11,
+      "name": "Vue.js",
+      "url": "https://vuejs.org",
+      "tags": ["前端框架", "JavaScript"]
+    },
+    {
+      "id": 12,
+      "name": "Angular",
+      "url": "https://angular.io",
+      "tags": ["前端框架", "TypeScript"]
+    },
+    {
+      "id": 13,
+      "name": "Node.js",
+      "url": "https://nodejs.org",
+      "tags": ["後端", "JavaScript", "執行環境"]
+    },
+    {
+      "id": 14,
+      "name": "Python",
+      "url": "https://www.python.org",
+      "tags": ["程式語言", "後端"]
+    },
+    {
+      "id": 15,
+      "name": "MongoDB",
+      "url": "https://www.mongodb.com",
+      "tags": ["資料庫", "NoSQL"]
+    },
+    {
+      "id": 16,
+      "name": "PostgreSQL",
+      "url": "https://www.postgresql.org",
+      "tags": ["資料庫", "SQL"]
+    },
+    {
+      "id": 17,
+      "name": "AWS",
+      "url": "https://aws.amazon.com",
+      "tags": ["雲端服務", "部署"]
+    },
+    {
+      "id": 18,
+      "name": "Firebase",
+      "url": "https://firebase.google.com",
+      "tags": ["後端服務", "資料庫", "驗證"]
+    },
+    {
+      "id": 19,
+      "name": "Figma",
+      "url": "https://www.figma.com",
+      "tags": ["設計工具", "協作"]
+    },
+    {
+      "id": 20,
+      "name": "CodePen",
+      "url": "https://codepen.io",
+      "tags": ["前端工具", "程式碼分享"]
+    }
+  ]
+}
