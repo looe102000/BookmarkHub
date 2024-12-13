@@ -22,7 +22,27 @@ header {
 }
 
 .search-box {
-    margin: 1rem 0;
+    margin: 1rem auto; /* 改為 auto 來達到水平置中 */
+    width: 100%;
+    max-width: 400px;
+    display: flex; /* 新增 flex 容器 */
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.search-box input:focus {
+    border-color: #666;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 #searchInput {

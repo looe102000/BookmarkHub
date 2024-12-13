@@ -6,32 +6,55 @@
     <title>書籤中心</title>
     <link rel="stylesheet" href="styles/main.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>書籤中心</h1>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="搜尋連結...">
-            </div>
-            <div class="view-toggle">
-                <button id="gridView" class="view-btn active" title="網格檢視">
-                    <span class="material-icons">grid_view</span>
-                </button>
-                <button id="listView" class="view-btn" title="清單檢視">
-                    <span class="material-icons">view_list</span>
-                </button>
-                <button id="tagsToggleBtn" class="view-btn active" title="顯示/隱藏書籤標籤">
-                    <span class="material-icons">label</span>
-                </button>
-                <button id="tagListToggleBtn" class="view-btn active" title="顯示/隱藏標籤列表">
-                    <span class="material-icons">list</span>
-                </button>
-            </div>
-        </header>
-        <main>
-            <div id="linksList" class="links-grid"></div>
-        </main>
+    <div id="app">
+        <div class="container">
+            <header>
+                <h1>書籤中心</h1>
+                <div class="search-box">
+                    <input type="text" v-model="searchTerm" placeholder="搜尋連結...">
+                </div>
+                <div class="view-toggle">
+                    <button @click="viewType = 'grid'" :class="['view-btn', { active: viewType === 'grid' }]" title="網格檢視">
+                        <span class="material-icons">grid_view</span>
+                    </button>
+                    <button @click="viewType = 'list'" :class="['view-btn', { active: viewType === 'list' }]" title="清單檢視">
+                        <span class="material-icons">view_list</span>
+                    </button>
+                    <button @click="toggleTags" :class="['view-btn', { active: showTags }]" title="顯示/隱藏書籤標籤">
+                        <span class="material-icons">label</span>
+                    </button>
+                    <button @click="toggleTagList" :class="['view-btn', { active: showTagList }]" title="顯示/隱藏標籤列表">
+                        <span class="material-icons">list</span>
+                    </button>
+                </div>
+            </header>
+            <main>
+                <div class="tags-list" v-show="showTagList">
+                    <span v-for="tag in uniqueTags" 
+                          :key="tag"
+                          @click="filterByTag(tag)"
+                          :class="['tag-filter', { active: selectedTag === tag }]">
+                        {{ tag }}
+                    </span>
+                </div>
+                <div :class="['links-container', viewType === 'grid' ? 'links-grid' : 'links-list']">
+                    <div v-for="(link, index) in filteredLinks" 
+                         :key="link.id" 
+                         class="link-card">
+                        <div class="link-number">{{ index + 1 }}</div>
+                        <h3><a :href="link.url" target="_blank">{{ link.name }}</a></h3>
+                        <div :class="['tags', { show: showTags }]">
+                            <span v-for="tag in link.tags" 
+                                  :key="tag" 
+                                  class="tag">{{ tag }}</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
     <script src="scripts/app.js"></script>
 </body>
