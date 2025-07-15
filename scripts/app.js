@@ -106,32 +106,6 @@ const app = createApp({
             selectedTag.value = selectedTag.value === tag ? null : tag
         }
 
-        /**
-         * 編輯書籤
-         * 彈窗修改 name/desc，並即時更新
-         */
-        const editLink = (link) => {
-            const newName = prompt('請輸入新的名稱', link.name)
-            if (newName !== null && newName.trim() !== '') {
-                link.name = newName.trim()
-            }
-            const newDesc = prompt('請輸入新的描述', link.desc || '')
-            if (newDesc !== null) {
-                link.desc = newDesc.trim()
-            }
-        }
-
-        /**
-         * 刪除書籤
-         * 直接移除 links 陣列中的該項
-         */
-        const deleteLink = (link) => {
-            const idx = links.value.findIndex(l => l.id === link.id)
-            if (idx !== -1 && confirm('確定要刪除這個書籤嗎？')) {
-                links.value.splice(idx, 1)
-            }
-        }
-
         // debounce searchTerm update
         watch(searchTerm, debounce((val) => {
             debouncedSearchTerm.value = val;
@@ -152,9 +126,7 @@ const app = createApp({
             filteredLinks,
             toggleTags,
             toggleTagList,
-            filterByTag,
-            editLink,
-            deleteLink
+            filterByTag
         }
     }
 })

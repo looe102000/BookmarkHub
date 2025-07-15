@@ -50,8 +50,7 @@
                         <h3><a :href="link.url" target="_blank" rel="noopener noreferrer">{{ link.name }}</a></h3>
                         <p class="desc">{{ link.desc }}</p>
                         <div class="card-actions">
-                            <button @click="editLink(link)">編輯</button>
-                            <button @click="deleteLink(link)">刪除</button>
+                            <!-- 編輯和刪除按鈕已移除 -->
                         </div>
                         <div :class="['tags', { show: showTags }]">
                             <span v-for="tag in link.tags" 
