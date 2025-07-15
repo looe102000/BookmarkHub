@@ -33,6 +33,7 @@
             </header>
             <main>
                 <div class="tags-list" v-show="showTagList">
+                    <span class="tag-filter" :class="{ active: !selectedTag }" @click="filterByTag(null)">全部</span>
                     <span v-for="tag in uniqueTags" 
                           :key="tag"
                           @click="filterByTag(tag)"
@@ -41,17 +42,28 @@
                     </span>
                 </div>
                 <div :class="['links-container', viewType === 'grid' ? 'links-grid' : 'links-list']">
-                    <div v-for="(link, index) in filteredLinks" 
+                    <div v-for="(link, index) in pagedLinks" 
                          :key="link.id" 
                          class="link-card">
-                        <div class="link-number">{{ index + 1 }}</div>
-                        <h3><a :href="link.url" target="_blank">{{ link.name }}</a></h3>
+                        <div class="link-number">{{ (currentPage - 1) * 20 + index + 1 }}</div>
+                        <img :src="'https://www.google.com/s2/favicons?domain=' + link.url" class="favicon" alt="favicon" />
+                        <h3><a :href="link.url" target="_blank" rel="noopener noreferrer">{{ link.name }}</a></h3>
+                        <p class="desc">{{ link.desc }}</p>
+                        <div class="card-actions">
+                            <button @click="editLink(link)">編輯</button>
+                            <button @click="deleteLink(link)">刪除</button>
+                        </div>
                         <div :class="['tags', { show: showTags }]">
                             <span v-for="tag in link.tags" 
                                   :key="tag" 
                                   class="tag">{{ tag }}</span>
                         </div>
                     </div>
+                </div>
+                <div class="pagination" v-if="pageCount > 1">
+                    <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">上一頁</button>
+                    <span>第 {{ currentPage }} / {{ pageCount }} 頁</span>
+                    <button @click="goToPage(currentPage + 1)" :disabled="currentPage === pageCount">下一頁</button>
                 </div>
             </main>
         </div>

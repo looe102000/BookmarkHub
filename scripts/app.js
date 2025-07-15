@@ -1,5 +1,14 @@
+// debounce function
+function debounce(fn, delay) {
+    let timer = null;
+    return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
 // 從 Vue 3 引入需要的 API
-const { createApp, ref, computed } = Vue
+const { createApp, ref, computed, watch } = Vue
 
 // 創建 Vue 應用實例
 const app = createApp({
@@ -8,10 +17,23 @@ const app = createApp({
         // 響應式狀態宣告
         const links = ref([])          // 儲存所有書籤連結
         const searchTerm = ref('')     // 搜尋關鍵字
+        const debouncedSearchTerm = ref('');
         const showTags = ref(true)     // 控制標籤的顯示狀態
         const showTagList = ref(true)  // 控制標籤列表的顯示狀態
         const selectedTag = ref(null)  // 目前選中的標籤
         const viewType = ref('grid')   // 視圖類型：grid(網格) 或 list(列表)
+        const currentPage = ref(1)
+        const pageSize = 20
+        const pageCount = computed(() => Math.ceil(filteredLinks.value.length / pageSize))
+        const pagedLinks = computed(() => {
+            const start = (currentPage.value - 1) * pageSize
+            return filteredLinks.value.slice(start, start + pageSize)
+        })
+        const goToPage = (page) => {
+            if (page >= 1 && page <= pageCount.value) {
+                currentPage.value = page
+            }
+        }
 
         // 初始化：從 JSON 檔案載入書籤數據
         fetch('data/links.json')
@@ -35,9 +57,9 @@ const app = createApp({
         const filteredLinks = computed(() => {
             let result = links.value
 
-            // 搜尋過濾
-            if (searchTerm.value) {
-                const term = searchTerm.value.toLowerCase()
+            // 使用 debouncedSearchTerm
+            if (debouncedSearchTerm.value) {
+                const term = debouncedSearchTerm.value.toLowerCase()
                 result = result.filter(link => 
                     link.name.toLowerCase().includes(term) ||
                     link.tags.some(tag => tag.toLowerCase().includes(term))
@@ -84,6 +106,37 @@ const app = createApp({
             selectedTag.value = selectedTag.value === tag ? null : tag
         }
 
+        /**
+         * 編輯書籤
+         * 彈窗修改 name/desc，並即時更新
+         */
+        const editLink = (link) => {
+            const newName = prompt('請輸入新的名稱', link.name)
+            if (newName !== null && newName.trim() !== '') {
+                link.name = newName.trim()
+            }
+            const newDesc = prompt('請輸入新的描述', link.desc || '')
+            if (newDesc !== null) {
+                link.desc = newDesc.trim()
+            }
+        }
+
+        /**
+         * 刪除書籤
+         * 直接移除 links 陣列中的該項
+         */
+        const deleteLink = (link) => {
+            const idx = links.value.findIndex(l => l.id === link.id)
+            if (idx !== -1 && confirm('確定要刪除這個書籤嗎？')) {
+                links.value.splice(idx, 1)
+            }
+        }
+
+        // debounce searchTerm update
+        watch(searchTerm, debounce((val) => {
+            debouncedSearchTerm.value = val;
+        }, 300));
+
         return {
             links,
             searchTerm,
@@ -91,11 +144,17 @@ const app = createApp({
             showTagList,
             selectedTag,
             viewType,
+            currentPage,
+            pageCount,
+            pagedLinks,
+            goToPage,
             uniqueTags,
             filteredLinks,
             toggleTags,
             toggleTagList,
-            filterByTag
+            filterByTag,
+            editLink,
+            deleteLink
         }
     }
 })
